@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>this</title>
+</head>
+<body>
+	<div>
+		<button>button</button>
+	</div>
+	<script type="text/javascript">
+		// 一、全局作用或者普通函数的this都指向window
+		// console.log(this);
+		// function bar() {
+		// 	console.log(this);
+		// }
+		// bar();
+		// (function() {console.log(this)})();
+		// var bar = function() {
+		// 	console.log(this);
+		// }
+		// bar();
+
+		// // 二、方法调用中谁调用this就指向谁
+		
+		// // 1.对象方法调用
+		// var person = {
+		// 	run: function() {
+		// 		console.log(this);
+		// 	}
+		// }
+		// person.run();
+		// // 2.事件绑定
+		// var btn = document.querySelector("button");
+		// btn.onclick = function() {
+		// 	console.log('0', this);
+		// }
+		// // 3.事件监听
+		// btn.addEventListener("click", function() {
+		// 	console.log('1', this);
+		// })
+		// 三、在构造函数或者构造函数原型对象中的this指向构造函数实例
+		// 不使用new指向window
+		// function Person(name) {
+		// 	console.log(this);
+		// 	this.name = name;
+		// }
+		// Person("inwe");
+		// // 使用new
+		// function Person(name) {
+		// 	this.name = name;
+		// 	console.log(this);
+		// 	self = this;
+		// }
+		// var people = new Person("inwe");
+		// console.log(self === people);
+		// //这里new改变了this指向，将this由window指向Person的实例对象people
+	
+		// // 箭头函数中指向外层作用域的this
+		// var obj = {
+		// 	foo() {
+		// 		console.log(this);
+		// 	},
+		// 	bar: () => {
+		// 		console.log(this);
+		// 	}
+		// }
+		// obj.foo();
+		// obj.bar();
+		// 
+		// 
+		// 
+		/**
+		 * this的指向问题
+		 */
+		// function a() {
+		// 	var user = "ksf";
+		// 	console.log(this.user); // undefined
+		// 	console.log(this); // window
+		// }
+		// window.a();
+		// ----
+		// var o = {
+		// 	user: 'ksf',
+		// 	fn: function() {
+		// 		console.log(this.user);
+		// 	}
+		// }
+		// o.fn(); // ksf
+		// ----
+		// var o = {
+		// 	a: 23,
+		// 	b: {
+		// 		a: 12,
+		// 		fn: function() {
+		// 			console.log(this.a); // 12
+		// 		}
+		// 	}
+		// };
+		// o.b.fn();
+		// ----
+		// var o = {
+		// 	a: 23,
+		// 	b: {
+		// 		fn: function() {
+		// 			console.log(this.a); // undefined
+		// 		}
+		// 	}
+		// };
+		// o.b.fn();
+		// -----
+		// var o = {
+		// 	a: 10,
+		// 	b: {
+		// 		a: 12,
+		// 		fn: function() {
+		// 			console.log(this.a);
+		// 			console.log(this);
+		// 		}
+		// 	}
+		// }
+		// var j = o.b.fn;
+		// j();
+		// o.b.fn();
+		// 构造函数中的this
+		// function Fn() {
+		// 	this.user = 'ksf';
+		// 	console.log(this);
+		// }
+		// var a = new Fn();
+		// console.log(a.user, a);
+		// 
+		// call
+		// function foo() {
+		// 	console.log(this.a);
+		// }
+		// var a = 2;
+		// var obj1 = {
+		// 	a: 3
+		// }
+		// var obj2 = {
+		// 	a: 4
+		// }
+		// foo.call(obj1)
+		// foo.call(obj2)
+		/**
+		 * 箭头函数的this绑定只取决于外层（函数或全局）的作用域
+		 * 我们看到箭头函数的this绑定只取决于外层（函数或全局）的作用域
+		 */
+		// 1.正常的箭头函数
+		// var foo = () => {
+		// 	console.log(this.a);
+		// }
+		// var a = 2;
+		// var obj = {
+		// 	a: 3,
+		// 	foo: foo
+		// }
+		// obj.foo();
+		// foo.call(obj);
+		// 2.普通函数有return
+		// function foo() {
+		// 	return function() {
+		// 		console.log(this.a);
+		// 	}
+		// }
+		// var a = 2;
+		// var obj = {
+		// 	a: 3,
+		// 	foo: foo
+		// };
+		// var bar = obj.foo();
+		// bar();
+		// 3.箭头函数有return
+		function foo() {
+			return () => {
+				console.log(this.a);
+			}
+		}
+		var a = 2;
+		var obj = {
+			a: 3,
+			foo: foo
+		}
+		var bar = obj.foo();
+		bar();
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
