@@ -1,3 +1,8 @@
 测试一下rebase
+
 master 第一次commit
 master 在github上提交
+
+第一次commit
+第二次commit
+第三次commit
